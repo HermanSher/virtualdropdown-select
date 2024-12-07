@@ -1,8 +1,8 @@
 {
-  "name": "virtualdropdown",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "virtualdropdown-select",
+  "version": "1.0.4",
+  "main": "dist/virtualdropdown-select.umd.js",
+  "module": "dist/virtualdropdown-select.esm.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,15 +15,24 @@
     "react-window": "^1.8.10"
   },
   "devDependencies": {
-    "@eslint/js": "^9.15.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.15.0",
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.12.0",
-    "vite": "^6.0.1"
-  }
+    "vite": "^4.0.0",
+    "@vitejs/plugin-react": "^4.3.4"
+  },
+  "description": "A component that allows us to use select and search for long select options.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HermanSher/virtualdropdown-select.git"
+  },
+  "keywords": [
+    "dropdown-select",
+    "virtual-select",
+    "virtualized-select",
+    "react-select"
+  ],
+  "author": "HermannSher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HermanSher/virtualdropdown-select/issues"
+  },
+  "homepage": "https://github.com/HermanSher/virtualdropdown-select#readme"
 }
