@@ -1,111 +1,113 @@
-Virtualized Dropdown Component
-A highly customizable dropdown component for React applications, supporting features like search, multiple selection, and virtualization for efficient rendering of large datasets.
+# Virtualized Dropdown Select
 
-Features
-Virtualized Rendering: Efficiently renders a large list of items using react-window to improve performance.
-Searchable: Supports a search field to filter through the list of items.
-Multiple Selection: Allows the selection of multiple items.
-Dynamic Key Field: Customizable key field (keyField) for each item.
-Customizable Styling: Customizes input box width, dropdown height, item height, and more.
-Responsive: Dynamically adjusts the dropdown height based on viewport size.
-Installation
-To use this component, you must have the following dependencies installed:
+A customizable, virtualized dropdown component for selecting multiple items with search and dynamic loading. It uses `react-window` for rendering large lists efficiently.
 
-react
-react-window (for virtualized rendering)
-npm install react-window
+## Installation
 
-Usage:
-You can import the VirtualizedDropdown component and use it like this:
+To install `virtualdropdown-select` via npm, run:
 
-import VirtualizedDropdown from './path/to/VirtualizedDropdown';
+```bash
+npm install virtualdropdown-select
 
-const fullData = [
-  { id: 1, customer: 'John Doe', email: 'john@example.com' },
-  { id: 2, customer: 'Jane Smith', email: 'jane@example.com' },
-  { id: 3, customer: 'Alex Johnson', email: 'alex@example.com' },
-  // Add more data as needed
-];
+yarn add virtualdropdown-select
 
-const handleChange = (selectedItems) => {
-  console.log('Selected Items:', selectedItems);
+
+Usage
+Here's an example of how to use the VirtualizedDropdown component in your React app:
+
+import React from "react";
+import VirtualizedDropdown from "virtualdropdown-select";
+
+const MyComponent = () => {
+  const fullData = [
+    { id: 1, customer: "John Doe", position: "Manager" },
+    { id: 2, customer: "Jane Smith", position: "Developer" },
+    // Add more data as needed
+  ];
+
+  const handleChange = (selectedItems) => {
+    console.log(selectedItems);
+  };
+
+  return (
+    <VirtualizedDropdown
+      fullData={fullData}
+      displayKey="customer"
+      onChange={handleChange}
+      multipleSelect={true}
+      chunkSize={100}
+    />
+  );
 };
 
-function App() {
+export default MyComponent;
+
+
+# Virtualized Dropdown Select
+
+## Props
+
+| Prop Name         | Type               | Default Value | Description                                                                                  |
+|-------------------|--------------------|---------------|----------------------------------------------------------------------------------------------|
+| `fullData`        | `Array`            | `[]`          | The full list of data to be displayed in the dropdown.                                        |
+| `chunkSize`       | `number`           | `100`         | The number of items to load at a time.                                                        |
+| `itemHeight`      | `number`           | `35`          | Height of each item in the dropdown list.                                                     |
+| `displayKey`      | `string`           | `customer`    | The key in the object that will be displayed as the text in the dropdown.                     |
+| `inputWidth`      | `string`           | `100%`        | The width of the search input field.                                                          |
+| `inputHeight`     | `string`           | `35px`        | The height of the search input field.                                                         |
+| `inputColor`      | `string`           | `#ccc`        | The border color of the search input field.                                                   |
+| `multipleSelect`  | `boolean`          | `true`        | Whether multiple items can be selected.                                                       |
+| `dropdownWidth`   | `string`           | `350px`       | The width of the dropdown list.                                                               |
+| `maxDropdownHeight` | `number`         | `300`         | The maximum height of the dropdown list before scrolling is enabled.                          |
+| `onChange`        | `(selectedItems: Array)` | `undefined` | Callback function that is triggered when the selection changes. Receives the selected items.  |
+| `keyField`        | `string`           | `id`          | The field that will be used as the unique identifier for the items.                           |
+
+## Example Usage
+
+```tsx
+import React from "react";
+import VirtualizedDropdown from "./VirtualizedDropdown";
+
+const MyComponent = () => {
+  const fullData = [
+    { id: 1, customer: "John Doe", position: "Manager" },
+    { id: 2, customer: "Jane Smith", position: "Developer" },
+    // Add more data as needed
+  ];
+
+  const handleChange = (selectedItems) => {
+    console.log(selectedItems);
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Select Customer</h1>
-      <VirtualizedDropdown
-        fullData={fullData}
-        displayKey="customer" // The field to be displayed in the dropdown
-        keyField="id" // The field to be used as the unique identifier
-        chunkSize={50}  // Number of items to load at once
-        itemHeight={35} // Height of each item in the dropdown
-        dropdownWidth="350px"
-        maxDropdownHeight={300}
-        onChange={handleChange}
-      />
-    </div>
+    <VirtualizedDropdown
+      fullData={fullData}
+      displayKey="customer"
+      onChange={handleChange}
+      multipleSelect={true}
+      chunkSize={100}
+    />
   );
-}
+};
 
-export default App;
-
-
-
-Props
-Prop	Type	Default	Description
-fullData	array	-	The complete dataset to be displayed in the dropdown.
-chunkSize	number	100	Number of items to load at a time in the virtualized list.
-itemHeight	number	35	The height of each item in the dropdown list.
-displayKey	string	"customer"	The field from each item in the data object that will be displayed as the title in the dropdown (e.g., "customer", "name", "email").
-inputWidth	string	"100%"	Width of the search input field.
-inputHeight	string	"35px"	Height of the search input field.
-inputColor	string	"#ccc"	Border color of the input field.
-multipleSelect	boolean	true	Whether multiple items can be selected.
-dropdownWidth	string	"350px"	Width of the dropdown menu.
-maxDropdownHeight	number	300	Maximum height of the dropdown menu before it becomes scrollable.
-onChange	function	-	Callback function that receives the selected items array when selection changes.
-keyField	string	"id"	The field used as the unique identifier for each item in the data (e.g., "id", "key", etc.). This is used to track selected items.
+export default MyComponent;
 
 
-Key Props Details
-displayKey
-This is the field from the object that will be shown as the title in the dropdown list.
-You can pass any field name from your data objects. For instance, if your data objects have a customerName field, you would use displayKey="customerName".
-This prop allows flexibility in choosing what field to display in the dropdown.
-keyField
-The keyField prop determines which field will be used to uniquely identify each item in the dataset.
-For example, if your data items have an id field (like { id: 1, customer: 'John' }), you would set keyField="id".
-This ensures that selections are correctly tracked using a unique identifier.
-Example with Multiple Selection
-If you enable multiple selection, selected items will be shown above the input field with the option to clear all selections.
-
-<VirtualizedDropdown
-  fullData={fullData}
-  displayKey="customer" // You can customize this to any field you like
-  keyField="id" // The unique identifier for each item
-  multipleSelect={true}
-  onChange={(selectedItems) => console.log(selectedItems)}
-/>
+Features
+Virtualization: Renders only the visible items for improved performance with large datasets.
+Searchable Dropdown: Allows users to filter the list based on the search query.
+Multiple Selection: Supports multiple selections when multipleSelect is true.
+Dynamic Loading: Loads additional items as the user scrolls.
 
 
-Example with Single Selection
-To allow for only single item selection, set multipleSelect={false}.
+Customization
+inputWidth: Customize the width of the input field.
+inputHeight: Adjust the height of the input field.
+dropdownWidth: Customize the width of the dropdown list.
+maxDropdownHeight: Set a maximum height for the dropdown before it becomes scrollable.
 
 
-<VirtualizedDropdown
-  fullData={fullData}
-  displayKey="customer" // Display any field you want
-  keyField="id" // Define which field to use as unique identifier
-  multipleSelect={false}
-  onChange={(selectedItems) => console.log(selectedItems)}
-/>
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-
-Styling
-The dropdown component is highly customizable via props, such as inputWidth, dropdownWidth, and itemHeight. If you want to further customize the styles, you can do so using inline styles or pass custom CSS classes.
-
-Performance Considerations
-For large datasets, the chunkSize prop allows you to control how many items are loaded at once to minimize render time. The component uses virtualization to only render items that are currently visible in the dropdown, improving performance when dealing with large amounts of data.
